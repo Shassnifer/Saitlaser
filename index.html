@@ -1,93 +1,234 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saitlaser - Corte a Laser e Coleiras Inteligentes</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
-        header { background-color: #1a1a1a; color: white; padding: 30px 10px; }
-        h1 { margin: 0; font-size: 2.5em; }
-        .hero { padding: 40px 20px; background: white; }
-        .btn-pet { background-color: #25D366; color: white; padding: 18px 30px; font-size: 1.2em; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; }
-        .btn-pet:hover { background-color: #1ebe57; }
-        #status { margin-top: 15px; font-weight: bold; color: #555; }
-        
-        .partners-section { padding: 40px 20px; background-color: #e9e9e9; }
-        .partners-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
-        .partner-card { background: white; padding: 15px; border-radius: 8px; width: 200px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .partner-card h3 { margin-top: 0; color: #007bff; }
-        footer { background-color: #333; color: white; text-align: center; padding: 20px; position: relative; bottom: 0; width: 100%; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saitlaser & Proteção Animal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    .section-card {
+      background: #fff;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .section-title {
+      font-size: 1.8rem;
+      color: #111;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 8px;
+    }
+    
+    /* Botão Coleiras Inteligentes com fotos de Pet */
+    .banner-pet-link {
+      background: linear-gradient(135deg, #ff9900, #ff5500);
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 30px 0;
+      box-shadow: 0 6px 15px rgba(255, 85, 0, 0.3);
+      transition: transform 0.2s;
+    }
+    .banner-pet-link:hover {
+      transform: scale(1.02);
+    }
+    .banner-pet-text h3 {
+      font-size: 1.6rem;
+      margin-bottom: 5px;
+    }
+    .banner-pet-text p {
+      font-size: 1rem;
+    }
+    .pet-images {
+      display: flex;
+      gap: 10px;
+    }
+    .pet-images img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      object-fit: cover;
+    }
+
+    /* Alerta de Denúncia de Maus-Tratos */
+    .siren-alert {
+      background-color: #111;
+      color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 25px;
+      border: 3px solid red;
+      animation: alertBlink 1s infinite alternate;
+    }
+    @keyframes alertBlink {
+      0% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+      100% { border-color: #0044ff; box-shadow: 0 0 15px #0044ff; }
+    }
+    .siren-icon {
+      font-size: 2rem;
+      display: inline-block;
+      animation: spinSiren 2s linear infinite;
+    }
+    @keyframes spinSiren {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .btn-denuncia {
+      display: inline-block;
+      background: #d9534f;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    form label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      background: #28a745;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>Saitlaser</h1>
-        <p>Corte e Gravação a Laser de Alta Precisão</p>
-    </header>
+  <header>
+    <h1>Saitlaser</h1>
+    <p>Soluções Especializadas em Corte e Gravação a Laser</p>
+  </header>
 
-    <div class="hero">
-        <h2>Coleiras Inteligentes</h2>
-        <p>Encontrou um pet perdido? Clique no botão abaixo para compartilhar a localização com o dono.</p>
-        <button class="btn-pet" onclick="sendLocation()">Enviar Localização via WhatsApp</button>
-        <p id="status"></p>
+  <div class="container">
+    
+    <!-- Seção de Serviços a Laser -->
+    <div class="section-card">
+      <h2 class="section-title">Nossos Serviços</h2>
+      <p>Desenvolvemos projetos personalizados em acrílico, madeira, MDF, metal e outros materiais com máxima precisão e qualidade visual.</p>
     </div>
 
-    <div class="partners-section">
-        <h2>Parceiros e Indicações</h2>
-        <p>Conheça os profissionais que cuidam do seu melhor amigo.</p>
-        <div class="partners-grid">
-            <div class="partner-card">
-                <h3>Agropecuária</h3>
-                <p>Rações, medicamentos e acessórios.</p>
-            </div>
-            <div class="partner-card">
-                <h3>Clínica Veterinária</h3>
-                <p>Atendimento 24h e vacinas.</p>
-            </div>
-            <div class="partner-card">
-                <h3>Pet Shop</h3>
-                <p>Banho, tosa e muito carinho.</p>
-            </div>
-        </div>
+    <!-- Botão de Destaque Coleiras Inteligentes -->
+    <a href="#area-pet" class="banner-pet-link">
+      <div class="banner-pet-text">
+        <h3>Coleiras Inteligentes</h3>
+        <p>Clique aqui para conhecer nossa linha de proteção animal com QR Code!</p>
+      </div>
+      <div class="pet-images">
+        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=100&auto=format&fit=crop&q=60" alt="Cão">
+        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=100&auto=format&fit=crop&q=60" alt="Gato">
+      </div>
+    </a>
+
+    <!-- Seção Proteção Animal -->
+    <div id="area-pet" class="section-card">
+      <h2 class="section-title">Proteção Animal & Coleiras Inteligentes</h2>
+
+      <!-- Alerta com Sirene -->
+      <div class="siren-alert">
+        <span class="siren-icon">🚨</span>
+        <h3>DENÚNCIA DE MAUS-TRATOS</h3>
+        <p>Presenciou maus-tratos a animais? Faça sua denúncia anônima ou entre em contato direto com as autoridades.</p>
+        <a href="tel:190" class="btn-denuncia">Denunciar / Ligar Emergência</a>
+      </div>
+
+      <!-- Formulário de Cadastro Pet -->
+      <h3>Cadastrar Novo Pet / Coleira</h3>
+      <form onsubmit="event.preventDefault(); alert('Cadastro enviado!');">
+        <label>Nome do Pet:</label>
+        <input type="text" placeholder="Ex: Rex, Mia" required>
+
+        <label>Nome do Tutor:</label>
+        <input type="text" placeholder="Seu nome completo" required>
+
+        <label>Telefone / WhatsApp para Contato:</label>
+        <input type="tel" placeholder="(00) 00000-0000" required>
+
+        <label>Localização / Coordenadas GPS:</label>
+        <input type="text" placeholder="Cole o link do Google Maps ou coordenadas GPS">
+
+        <label>Locais Parceiros para Apoio / Doação:</label>
+        <select>
+          <option>Selecione o tipo de parceiro...</option>
+          <option>Agropecuárias</option>
+          <option>Clínicas Veterinárias</option>
+          <option>Pet Shops</option>
+        </select>
+
+        <label>Observações / Informações Médicas do Pet:</label>
+        <textarea rows="3" placeholder="Informações adicionais, vacinas, etc."></textarea>
+
+        <button type="submit">Salvar Cadastro do Pet</button>
+      </form>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Saitlaser. Todos os direitos reservados.</p>
-    </footer>
+  </div>
 
-    <script>
-        // Número do dono configurado (com código do país e DDD)
-        const OWNER_PHONE = "5548991706414"; 
+  <footer>
+    <p>&copy; Saitlaser - Todos os direitos reservados.</p>
+  </footer>
 
-        function sendLocation() {
-            const status = document.getElementById("status");
-
-            if (!navigator.geolocation) {
-                status.textContent = "Seu navegador não suporta geolocalização.";
-                return;
-            }
-
-            status.textContent = "Buscando localização...";
-
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-                    const mapsUrl = `https://maps.google.com/?q=${lat},${lon}`;
-                    
-                    const message = encodeURIComponent(`Olá! Encontrei o pet. Aqui está a localização onde ele está: ${mapsUrl}`);
-                    const whatsappUrl = `https://wa.me/${OWNER_PHONE}?text=${message}`;
-
-                    status.textContent = "Redirecionando para o WhatsApp...";
-                    window.location.href = whatsappUrl;
-                },
-                () => {
-                    status.textContent = "Não foi possível obter a localização. Verifique se o GPS está ativo.";
-                }
-            );
-        }
-    </script>
 </body>
 </html>
