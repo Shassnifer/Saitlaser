@@ -3,15 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saitlaser</title>
+    <title>Saitlaser - Corte a Laser e Coleiras Inteligentes</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
-        h1 { color: #333; }
-        p { color: #666; }
+        body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+        header { background-color: #1a1a1a; color: white; padding: 30px 10px; }
+        h1 { margin: 0; font-size: 2.5em; }
+        .hero { padding: 40px 20px; background: white; }
+        .btn-pet { background-color: #25D366; color: white; padding: 18px 30px; font-size: 1.2em; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; }
+        .btn-pet:hover { background-color: #1ebe57; }
+        #status { margin-top: 15px; font-weight: bold; color: #555; }
+        
+        .partners-section { padding: 40px 20px; background-color: #e9e9e9; }
+        .partners-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+        .partner-card { background: white; padding: 15px; border-radius: 8px; width: 200px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .partner-card h3 { margin-top: 0; color: #007bff; }
+        footer { background-color: #333; color: white; text-align: center; padding: 20px; position: relative; bottom: 0; width: 100%; }
     </style>
 </head>
 <body>
-    <h1>Bem-vindo ao Saitlaser</h1>
-    <p>Site oficial em breve.</p>
+
+    <header>
+        <h1>Saitlaser</h1>
+        <p>Corte e Gravação a Laser de Alta Precisão</p>
+    </header>
+
+    <div class="hero">
+        <h2>Coleiras Inteligentes</h2>
+        <p>Encontrou um pet perdido? Clique no botão abaixo para compartilhar a localização com o dono.</p>
+        <button class="btn-pet" onclick="sendLocation()">Enviar Localização via WhatsApp</button>
+        <p id="status"></p>
+    </div>
+
+    <div class="partners-section">
+        <h2>Parceiros e Indicações</h2>
+        <p>Conheça os profissionais que cuidam do seu melhor amigo.</p>
+        <div class="partners-grid">
+            <div class="partner-card">
+                <h3>Agropecuária</h3>
+                <p>Rações, medicamentos e acessórios.</p>
+            </div>
+            <div class="partner-card">
+                <h3>Clínica Veterinária</h3>
+                <p>Atendimento 24h e vacinas.</p>
+            </div>
+            <div class="partner-card">
+                <h3>Pet Shop</h3>
+                <p>Banho, tosa e muito carinho.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Saitlaser. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Número do dono configurado (com código do país e DDD)
+        const OWNER_PHONE = "5548991706414"; 
+
+        function sendLocation() {
+            const status = document.getElementById("status");
+
+            if (!navigator.geolocation) {
+                status.textContent = "Seu navegador não suporta geolocalização.";
+                return;
+            }
+
+            status.textContent = "Buscando localização...";
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const mapsUrl = `https://maps.google.com/?q=${lat},${lon}`;
+                    
+                    const message = encodeURIComponent(`Olá! Encontrei o pet. Aqui está a localização onde ele está: ${mapsUrl}`);
+                    const whatsappUrl = `https://wa.me/${OWNER_PHONE}?text=${message}`;
+
+                    status.textContent = "Redirecionando para o WhatsApp...";
+                    window.location.href = whatsappUrl;
+                },
+                () => {
+                    status.textContent = "Não foi possível obter a localização. Verifique se o GPS está ativo.";
+                }
+            );
+        }
+    </script>
 </body>
 </html>
