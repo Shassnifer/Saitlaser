@@ -2,241 +2,341 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shassnifer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 10px;
-      background-color: #f4f4f4;
-      margin: 0;
-    }
-    .header {
-      background-color: #000;
-      color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .header h1 {
-      margin: 10px 0 5px 0;
-      color: #fff;
-    }
-    .header p {
-      margin: 0;
-      color: #ccc;
-    }
-    
-    /* Galeria de Fotos */
-    .photo-grid {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .photo-box {
-      background: #e0e0e0;
-      border: 2px dashed #ccc;
-      border-radius: 8px;
-      width: 100px;
-      height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8em;
-      color: #666;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shassnifer - Corte e Gravação a Laser Personalizada</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Cabeçalho e Logo */
+        header {
+            margin-bottom: 25px;
+        }
+        .logo-img {
+            max-width: 220px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid #ff6600;
+            margin-bottom: 10px;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            color: #aaaaaa;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
 
-    /* Alerta Maus-Tratos com Sirenes */
-    .card-emergency {
-      background-color: #000;
-      color: #fff;
-      border: 2px solid #e50914;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
-      position: relative;
-    }
-    .emergency-title {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .siren-light {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-    .siren-left {
-      background-color: #ff0000;
-      box-shadow: 0 0 10px #ff0000;
-      animation: flashRed 1s infinite alternate;
-    }
-    .siren-right {
-      background-color: #0000ff;
-      box-shadow: 0 0 10px #0000ff;
-      animation: flashBlue 1s infinite alternate;
-    }
-    @keyframes flashRed {
-      0% { opacity: 1; transform: scale(1.1); }
-      100% { opacity: 0.2; transform: scale(0.9); }
-    }
-    @keyframes flashBlue {
-      0% { opacity: 0.2; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1.1); }
-    }
-    .card-emergency h2 {
-      color: #fff;
-      margin: 0;
-      font-size: 1.1em;
-    }
-    .btn-emergency {
-      background-color: #e50914;
-      color: #fff;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 1em;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 15px;
-    }
+        /* Botão para Acessar a Segunda Página */
+        .btn-main-nav {
+            background-color: #ff6600;
+            color: #ffffff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 30px;
+            transition: background 0.3s;
+        }
+        .btn-main-nav:hover {
+            background-color: #e65c00;
+        }
 
-    /* Formulário */
-    .form-section {
-      background: #fff;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      text-align: left;
-    }
-    .form-group {
-      margin-bottom: 10px;
-    }
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+        /* Seção Oculta Por Padrão (Segunda Página) */
+        #painel-coleiras {
+            display: none;
+        }
 
-    /* Parceiros */
-    .partners-section {
-      background: #fff;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .partners-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .partner-card {
-      background: #f9f9f9;
-      border: 1px solid #ddd;
-      padding: 10px;
-      border-radius: 5px;
-    }
+        /* Estilos dos Componentes */
+        .card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #333;
+            text-align: left;
+        }
+        .card h2 {
+            color: #ff6600;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
-    footer {
-      font-size: 0.8em;
-      color: #777;
-      margin-top: 20px;
-    }
-  </style>
+        /* Galeria e Vídeos */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .grid-fotos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .foto-placeholder {
+            background: #2a2a2a;
+            border: 1px dashed #555;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 0.8rem;
+            border-radius: 6px;
+        }
+
+        /* Alerta de Emergência */
+        .card-emergencia {
+            border: 2px solid #ff3333;
+            background-color: #2a1515;
+            text-align: center;
+        }
+        .btn-denuncia {
+            background-color: #ff3333;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Formulario */
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #ccc;
+            margin-bottom: 4px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background-color: #2a2a2a;
+            color: #fff;
+        }
+        .btn-salvar {
+            background-color: #0088cc;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Parceiros */
+        .grid-parceiros {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            text-align: center;
+        }
+        .item-parceiro {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1>Shassnifer</h1>
-    <p>Corte a Laser e Gravação Personalizada</p>
-  </div>
+    <div class="container">
+        <!-- CABEÇALHO DA PÁGINA PRINCIPAL -->
+        <header>
+            <img src="https://via.placeholder.com/220" alt="Jhasnifer Logo" class="logo-img">
+            <h1>Jhasnifer</h1>
+            <p class="subtitle">Corte a Laser e Gravação Personalizada</p>
+        </header>
 
-  <div class="photo-grid">
-    <div class="photo-box">Espaço para Foto 1</div>
-    <div class="photo-box">Espaço para Foto 2</div>
-    <div class="photo-box">Espaço para Foto 3</div>
-  </div>
+        <!-- BOTÃO PARA EXIBIR O CONTEÚDO DAS COLEIRAS INTELIGENTES -->
+        <button class="btn-main-nav" onclick="abrirColeiras()">
+            Coleiras Inteligentes & Proteção Animal
+        </button>
 
-  <div class="card-emergency">
-    <div class="emergency-title">
-      <span class="siren-light siren-left"></span>
-      <h2>DENÚNCIA DE MAUS-TRATOS</h2>
-      <span class="siren-light siren-right"></span>
+        <!-- SEÇÃO COMPLETA DAS COLEIRAS INTELIGENTES (SEGUNDA PÁGINA) -->
+        <div id="painel-coleiras">
+            
+            <!-- GPS / WHATSAPP -->
+            <div class="card">
+                <h2>Encontrou um Pet Perdido?</h2>
+                <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 12px; text-align: center;">
+                    Clique no botão abaixo para enviar a localização diretamente ao tutor via WhatsApp.
+                </p>
+                <button class="btn-whatsapp" onclick="enviarLocalizacao()">
+                    📍 Enviar Localização via WhatsApp
+                </button>
+            </div>
+
+            <!-- VÍDEO -->
+            <div class="card">
+                <h2>Conheça Nosso Trabalho</h2>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- GALERIA DE FOTOS -->
+            <div class="card">
+                <h2>Modelos de Coleiras</h2>
+                <div class="grid-fotos">
+                    <div class="foto-placeholder">Espaço para Foto 1</div>
+                    <div class="foto-placeholder">Espaço para Foto 2</div>
+                    <div class="foto-placeholder">Espaço para Foto 3</div>
+                </div>
+            </div>
+
+            <!-- MAUS-TRATOS -->
+            <div class="card card-emergencia">
+                <h2 style="color: #ff3333;">DENÚNCIA DE MAUS-TRATOS</h2>
+                <p style="font-size: 0.85rem; color: #ddd;">
+                    Presenciou maus-tratos a animais? Faça sua denúncia anônima ou entre em contato direto com as autoridades.
+                </p>
+                <button class="btn-denuncia" onclick="alert('Ligue para a Polícia Militar (190) ou IBAMA (0800 61 8080)')">
+                    🚨 Denunciar / Ligar Emergência
+                </button>
+            </div>
+
+            <!-- FORMULÁRIO DE CADASTRO DO PET -->
+            <div class="card">
+                <h2>Cadastrar Novo Pet / Coleira</h2>
+                <form id="formPet">
+                    <div class="form-group">
+                        <label>Nome do Pet:</label>
+                        <input type="text" placeholder="Ex: Rex, Mia">
+                    </div>
+                    <div class="form-group">
+                        <label>Nome do Tutor:</label>
+                        <input type="text" placeholder="Seu nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone / WhatsApp para Contato:</label>
+                        <input type="text" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label>Peso do Animal (kg):</label>
+                        <input type="text" placeholder="Ex: 8.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Características Visuais / Marcas:</label>
+                        <textarea rows="2" placeholder="Ex: Mancha preta no olho esquerdo, rabo curto..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Status de Vacinação e Saúde:</label>
+                        <textarea rows="2" placeholder="Ex: Vacinado (V10/Raiva), Castrado, usa medicação..."></textarea>
+                    </div>
+                    <button type="button" class="btn-salvar" onclick="alert('Dados salvos com sucesso!')">
+                        💾 Salvar Cadastro do Pet
+                    </button>
+                </form>
+            </div>
+
+            <!-- REDE DE APOIO / PARCEIROS -->
+            <div class="card">
+                <h2>Rede de Apoio & Serviços Pet</h2>
+                <div class="grid-parceiros">
+                    <div class="item-parceiro">🌾 Agropecuárias</div>
+                    <div class="item-parceiro">🐾 Pet Shops</div>
+                    <div class="item-parceiro">🩺 Clínicas Veterinárias</div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            © 2026 Jhasnifer - Corte e Gravação. Todos os direitos reservados.
+        </footer>
     </div>
-    <p style="font-size: 0.9em; margin-top: 10px;">Presenciou maus-tratos a animais? Faça sua denúncia anônima ou entre em contato direto com as autoridades.</p>
-    <a href="#" class="btn-emergency">Denunciar / Ligar Emergência</a>
-  </div>
 
-  <div class="form-section">
-    <h3>Cadastrar Novo Pet / Coleira</h3>
-    <div class="form-group">
-      <label>Nome do Pet:</label>
-      <input type="text" placeholder="Ex: Rex, Max">
-    </div>
-    <div class="form-group">
-      <label>Nome do Tutor:</label>
-      <input type="text" placeholder="Seu nome completo">
-    </div>
-  </div>
+    <script>
+        // Função para mostrar a segunda parte (Coleiras Inteligentes)
+        function abrirColeiras() {
+            var painel = document.getElementById('painel-coleiras');
+            painel.style.display = 'block';
+            painel.scrollIntoView({ behavior: 'smooth' });
+        }
 
-  <div class="partners-section">
-    <h2>Parceiros e Indicações</h2>
-    <p>Conheça os profissionais parceiros:</p>
-    <div class="partners-grid">
-      <div class="partner-card">
-        <h3>Agropecuária</h3>
-        <p>Rações, medicamentos</p>
-      </div>
-      <div class="partner-card">
-        <h3>Clínica Vet</h3>
-        <p>Atendimento 24h</p>
-      </div>
-      <div class="partner-card">
-        <h3>Pet Shop</h3>
-        <p>Banho, tosa e acessórios</p>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2026 Shassnifer. Todos os direitos reservados.</p>
-  </footer>
-
-  <script>
-    const OWNER_PHONE = "5500000000000"; // Insira aqui o seu número com DDD
-
-    function sendLocation() {
-      if (!navigator.geolocation) {
-        alert("Geolocalização não é suportada no seu navegador.");
-        return;
-      }
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
-        const message = encodeURIComponent(`Olá! Encontrei este pet. Minha localização atual é: ${mapsUrl}`);
-        window.location.href = `https://wa.me/${OWNER_PHONE}?text=${message}`;
-      }, () => {
-        alert("Não foi possível obter a localização.");
-      });
-    }
-  </script>
-
+        // Função de Geolocalização via WhatsApp
+        function enviarLocalizacao() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
+                    var mapUrl = "https://maps.google.com/?q=" + lat + "," + lon;
+                    var mensagem = encodeURIComponent("Olá! Encontrei seu pet neste local: " + mapUrl);
+                    window.open("https://wa.me/?text=" + mensagem, '_blank');
+                }, function(error) {
+                    alert("Não foi possível obter a localização. Verifique as permissões de GPS no seu navegador.");
+                });
+            } else {
+                alert("Geolocalização não é suportada por este navegador.");
+            }
+        }
+    </script>
 </body>
 </html>
